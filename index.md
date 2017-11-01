@@ -2,6 +2,11 @@
 
 An introductory database course, focusing on Postgres.
 
+## Week 1
+
+Slide are
+[here](https://docs.google.com/presentation/d/e/2PACX-1vS523DmMz-8ykd60BseWmh5gv2Zhhfzz_l6bJhJ3ql4dcpb4vGOwLDvTMmV8yAsd4R_3JX_itYIK5Ip/pub?start=false&loop=false&delayms=3000#slide=id.g293ad384ec_0_140).
+
 * [Lesson 1 - adding data and basic queries](lessons/lesson-1.html)
 * [Lesson 2 - more queries](lessons/lesson-2.html)
 
