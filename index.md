@@ -2,8 +2,8 @@
 
 An introductory database course, focusing on Postgres.
 
-* [Lesson 1 - adding data and basic queries](/lessons/lesson-1.html)
-* [Lesson 2 - more queries](/lessons/lesson-2.html)
+* [Lesson 1 - adding data and basic queries](lessons/lesson-1.html)
+* [Lesson 2 - more queries](lessons/lesson-2.html)
 
 Examples have been liberally borrowed from the Postgres docs and other
 usable sources.
