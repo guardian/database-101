@@ -81,6 +81,22 @@ SELECT * FROM products LIMIT 1;
 
 The 'DELETE' command is used to delete data:
 
-```sql
+>**Exercise:** Using the `DELETE` command and your newly gained
+>knowledge of Postgres and the docs, delete a *specific* record.
 
-```
+## Lastly, add a table constraint
+
+You may have noticed that we have not constrained the data in our
+table. There could, for example, be multiple records with the same
+product_no.
+
+A great feature of relational databases is that we can add constraints
+to make sure our data is correct.
+
+>**Exercise:** ALTER the table to add a UNIQUE constraint to the
+>product_no column
+
+Hint: you should look at the ALTER TABLE command for help here.
+
+Once done, use `\d+ products` to inspect the table and see you new
+constraint!

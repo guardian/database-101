@@ -22,10 +22,19 @@ usable sources.
 Once Postgres is running, you can use `psql` at the command line to
 gain access.
 
+## Getting help and documentation
+
 `psql` help is available using:
 
     \h // for SQL commands, e.g. \h SELECT
     \? // for Postgres management help, e.g. \d+ products
+
+[Postgres documentation](https://www.postgresql.org/docs/current/static/index.html)
+is great; you should use it liberally during the course.
+
+Instructions for understanding the command synopses are
+[here](https://www.postgresql.org/docs/current/static/notation.html)
+so read that too.
 
 ## Contributing
 
