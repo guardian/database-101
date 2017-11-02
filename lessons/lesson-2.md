@@ -43,6 +43,10 @@ INSERT INTO products (product_no, name, price) VALUES
 
 ## Subqueries
 
+SQL frequently allows you to nest one or more queries inside
+another. This is mostly useful when joining tables, but can also be
+useful with a single table.
+
 Imagine we want to find all cheeses where the price is the same as the
 price of Camembert.
 
@@ -69,8 +73,6 @@ WHERE price = (
 There are lots of opportunities in SQL to use subqueries in the place
 of constants or lists. Typically though, we use them with joins.
 
-First, add a constraint
-
 Add the following table:
 
 ```sql
@@ -90,9 +92,10 @@ INSERT INTO orders (product_no, date) VALUES
     (2, now() - interval '1 hour');
 ```
 
-*Note: we haven't applied any constraints here so it's possible to
-make mistakes. We'll look at constraints in the next lesson to fix
-this though.*
+*Note: we haven't applied any constraints here so it's possible to add
+invalid product_no's. We'll look at constraints in more detail in the
+next lesson to fix this though. If you are feeling enthusiastic you
+could add a foreign key constraint now though.*
 
 >**Exercise!** Using a subquery, select all products where there is a
 >matching order.
