@@ -27,8 +27,8 @@ CREATE TABLE products (
 );
 ```
 
-(Dropping and recreating tends to be quicker than deleting for bigger
-tables.)
+*Note: Dropping and recreating tends to be quicker than deleting for bigger
+tables, but can you find another way to delete all the rows from the table?*
 
 Insert some data:
 
@@ -57,7 +57,7 @@ You should get a list of Camembert, Roquefort, and Cheddah.
 You probably used a simple select statement with a where clause
 checking price.
 
-But what if the price of Cheddah changes frequently and you don't know
+But what if the price of Camembert changes frequently and you don't know
 it up front?
 
 One solution is a subquery:
@@ -66,7 +66,7 @@ One solution is a subquery:
 SELECT *
 FROM products
 WHERE price = (
-    SELECT price FROM products WHERE name = 'Cheddah'
+    SELECT price FROM products WHERE name = 'Camembert'
 ) ORDER BY name;
 ```
 
@@ -78,24 +78,24 @@ Add the following table:
 ```sql
 CREATE TABLE orders (
     product_no integer,
-    date timestamp
+    date timestamp,
+    quantity integer
 );
-
 ```
 
 And add some data:
 
 ```sql
-INSERT INTO orders (product_no, date) VALUES
-    (1, now()),
-    (2, now()),
-    (2, now() - interval '1 hour');
+INSERT INTO orders (product_no, date, quantity) VALUES
+    (1, now(), 2),
+    (2, now(), 3),
+    (2, now() - interval '1 hour', 1);
 ```
 
 *Note: we haven't applied any constraints here so it's possible to add
 invalid product_no's. We'll look at constraints in more detail in the
 next lesson to fix this though. If you are feeling enthusiastic you
-could add a foreign key constraint now though.*
+could add a foreign key constraint now!*
 
 >**Exercise!** Using a subquery, select all products where there is a
 >matching order.
@@ -119,6 +119,12 @@ The docs on these are
 >**Exercise:** find the average price of items in the products table
 
 >**Exercise:** find the min and max price *in the same query*
+
+## Putting it together
+
+Now you should know how to apply a filter, aggregate and join.
+
+>**Exercise:** find the list of products, their name, and what quantity has been ordered so far
 
 ## Peeking under the hood
 
