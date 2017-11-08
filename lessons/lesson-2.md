@@ -124,7 +124,7 @@ The docs on these are
 
 Now you should know how to apply a filter, aggregate and join.
 
->**Exercise:** find the list of product, their name, and what quantity has been ordered so far
+>**Exercise:** find the list of products, their name, and what quantity has been ordered so far
 
 ## Peeking under the hood
 
