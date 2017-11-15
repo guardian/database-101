@@ -60,13 +60,13 @@ During the existence of a transaction, other accesses to the database will eithe
 ### Exercises
 >**Exercise:** Start a transaction, then update one or two lines of the `products` table. Validate the transaction, select all the lines can you see your changes?
 
+>Tip: here's the Postgres documentation about transactions: https://www.Postgresql.org/docs/current/static/tutorial-transactions.html
+
 >**Exercise:** Now start a new transaction, then update again one or two lines of the `products` table. This time, rollback the transaction, select all the lines can you see your changes?
 
 >**Exercise:** Open two connections A and B to your database (in pgadmin, open the query editor twice). Starting a transaction from connection A insert one new product and update an existing product. After each insertion of update, select all the rows from the connection B.
 
->Tip: here's the Postgres documentation about transaction: https://www.Postgresql.org/docs/current/static/tutorial-transactions.html
-
-From the connection B, you should only see changes once the transaction from connection B was validated. This is called transaction isolation.
+From the connection B, you should only see changes once the transaction from connection A was validated. This is called transaction isolation.
 
 >**Exercise:** Open two connections A and B to your database (in pgadmin, open the query editor twice). Starting a transaction from connection A, update an existing product. Starting a transaction from connection B, update the same product.
 Validate transaction A. What did you observe?
@@ -75,7 +75,7 @@ You should have seen connection B blocked. This is due to two transaction trying
 
 *Note: it is important to remember that transactions can be blocking and aren't free, they do impact performance and can sometime lead to dead locks if they aren't used carefully. Like any powerful feature it is always a good idea to only use it if and only if you need it.*
 
-Twiddling your thumbs? Did you know there was many possible transaction isolation types? They all have different properties and the one we saw today is the strictest one: Serializable. You can read more about transaction isolation here: https://www.Postgresql.org/docs/current/static/transaction-iso.html
+Twiddling your thumbs? Did you know there was many possible transaction isolation types? They all have different properties and the one we saw today is the strictest of all: Serializable. You can read more about transaction isolation here: https://www.Postgresql.org/docs/current/static/transaction-iso.html
 
 ## Data types
 
@@ -95,7 +95,7 @@ Amongst the lesser known yet extremely useful are UUID and Json. We will have a 
 
 ### UUID
 
-A UUID is a standardized type of unique identifiers. They are supported by a very wide range of programming languages and are versatile. They are essentially very (*very*) big random numbers, with a very (*very*) low probability of [collision](https://en.wikipedia.org/wiki/Universally_unique_identifier#Collisions). Postgres comes with support for that type, and additional functions in a separate module.
+A UUID is a standardized type of unique identifiers. They are supported by a very wide range of programming languages and are versatile. They are essentially very (*very*) big random numbers, with a very (*very*) low probability of [collision](https://en.wikipedia.org/wiki/Universally_unique_identifier#Collisions). They become especially useful as your start scaling horizontally your application (distributed apps). Postgres comes with support for that type, and additional functions in a separate module.
 
 >**Exercise:** Can you drop and recreate our `products` table and setting the `product_no` as a UUID?
 
@@ -131,20 +131,23 @@ INSERT INTO products (product_no, name, price) VALUES
 ```
 > select all the lines, you should now see a UUID in identifying each of your product.
 
-*Hint, the UUID documentation can be found [here](https://www.postgresql.org/docs/current/static/datatype-uuid.html) and [here](https://www.postgresql.org/docs/current/static/uuid-ossp.html)*
+*Hint: the UUID documentation can be found [here](https://www.postgresql.org/docs/current/static/datatype-uuid.html) and [here](https://www.postgresql.org/docs/current/static/uuid-ossp.html)*
 
+We just learned how to use and generate UUIDs within a database. Because of their low probability of collisions UUIDs can be generated in your app, allowing you to know in advance what ID will be associated with the object you are about to insert. This contrasts with a more traditional way of inserting data (auto-increments) where you only know about what ID was assigned to your object after insertion, and contrasts with sequences, as you don't need a round trip to the database.
 
 ### Json
 
 It could _a priori_ sound quite odd to start using a type like json in a relational database like Postgres especially as Json is quite open and loosely typed.
 
-However if your application requires both the rigidity of a typed and constrained database, and the openness of Json to store your data, you can get the best of both world by using a json column.
+However if your application requires both the rigidity of a typed and constrained database, and the openness of Json to store your data, you can get the best of both world by using a json column where appropriate.
 
 Postgres comes with native support for Json and it will ensure the json you are inserting or updating is valid.
 
+Before you start the exercises, have a quick look at the [json documentation](https://www.postgresql.org/docs/current/static/functions-json.html) to explore the possibilities.
+
 >**Exercise:** Modify the `products` table by adding a new column `metadata`. Bonus point if you manage to do it without dropping and recreating the table.
 
->**Exercise:** Insert a new product "maroilles" and set the `metadata` to `'{"comment": "this cheese is the smelliest of all"}'`
+>**Exercise:** Insert a new product "maroilles" and set the `metadata` to `'{"comment": "this cheese is the smelliest of all"}'`. Did you notice what happen if the json isn't valid?
 
 >**Exercise:** Now query the list of product names and their optional comments
 
@@ -156,6 +159,6 @@ You would ensure that there are no typos and no case issue when your data is ins
 
 >**Exercise:** Create a type named `smelliness` that describe how smelly a cheese can be.
 
->**Exercise:** Add the smelliness column to the `products` table in order to be able to fully describe the product. Insert or update a few rows to ensure it works.
+>**Exercise:** Add the `smell` column to the `products` table in order to be able to fully describe the product. Insert or update a few rows to ensure it works.
 
 *Hint: the documentation for enums can be found [here](https://www.postgresql.org/docs/current/static/datatype-enum.html)*
