@@ -9,6 +9,7 @@ Slide are
 
 * [Lesson 1 - adding data and basic queries](lessons/lesson-1.html)
 * [Lesson 2 - more queries](lessons/lesson-2.html)
+* [Lesson 3 - transactions and types](lessons/lesson-3.html)
 
 Examples have been liberally borrowed from the Postgres docs and other
 usable sources.
